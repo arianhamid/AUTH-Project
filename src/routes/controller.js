@@ -1,7 +1,9 @@
 const { validationResult } = require("express-validator");
-
+const User = require("./../models/users")
 module.exports = class {
-  constructor() {}
+  constructor() {
+    this.User = User
+  }
   validationBody = (req, res)=> {
     console.log(req.body);
     const result = validationResult(req);
@@ -23,5 +25,8 @@ module.exports = class {
       return;
     }
     next();
+  }
+  response(res,message,code=200,data={}){
+res.status(code).json({message,data})
   }
 };
