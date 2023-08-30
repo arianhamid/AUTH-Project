@@ -12,7 +12,7 @@ router.post(
 router.post(
   "/login",
   validator.loginValidator(),
-  controller.validate,
+  controller.validate.bind(this),
   controller.login.bind(this)
 );
 
