@@ -19,5 +19,9 @@ const isLoggedIn = async (req, res, next) => {
     res.status(400).json({ message: "invalid token" });
   }
 };
+async function isAdmin(req, res, next) {
+  if (!req.user.isAdmin) res.status(403).send("access denied");
+  next();
+}
 
-module.exports = { isLoggedIn };
+module.exports = { isLoggedIn, isAdmin };
