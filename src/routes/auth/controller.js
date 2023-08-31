@@ -49,7 +49,7 @@ module.exports = new (class extends controller {
         message: "Invalid Email Or Password!",
       });
     }
-    const token = jwt.sign({ _id: user.id }, config.get("jwt-key"));
+    const token = jwt.sign({ id: user.id }, config.get("jwt_key"));
     this.response({
       res,
       message: "User logged in successfully",
