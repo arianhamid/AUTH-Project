@@ -6,14 +6,14 @@ const validator = require("./validator");
 router.post(
   "/register",
   validator.registerValidator(), // array of validators
-  controller.validate.bind(this), //checks if there is errors
-  controller.register.bind(this) // controls what to do next
+  controller.validate, //checks if there is errors
+  controller.register // controls what to do next
 );
 router.post(
   "/login",
   validator.loginValidator(),
-  controller.validate.bind(this),
-  controller.login.bind(this)
+  controller.validate,
+  controller.login
 );
 
 module.exports = router;

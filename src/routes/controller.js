@@ -1,11 +1,12 @@
+const autoBind = require("auto-bind");
 const { validationResult } = require("express-validator");
-const User = require("./../models/users")
+const User = require("./../models/users");
 module.exports = class {
   constructor() {
-    this.User = User
+    autoBind(this);
+    this.User = User;
   }
-  validationBody = (req, res)=> {
-    console.log(req.body);
+  validationBody = (req, res) => {
     const result = validationResult(req);
     if (!result.isEmpty()) {
       const errors = result.array();
@@ -18,15 +19,15 @@ module.exports = class {
       return false;
     }
     return true;
-  }
-  validate= (req, res, next) => {
-    console.log("routes controller:", this);
+  };
+  validate = (req, res, next) => {
     if (!this.validationBody(req, res)) {
       return;
     }
     next();
-  }
-  response(res,message,code=200,data={}){
-res.status(code).json({message,data})
+  };
+  response({res, message, code = 200, data = {}}) {
+    res.status(code).json({ message, data });
+    console.log(message, code, data);
   }
 };
