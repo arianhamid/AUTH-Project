@@ -4,6 +4,7 @@ const _ = require("lodash");
 const jwt = require('jsonwebtoken')
 const config = require("config")
 
+
 module.exports = new (class extends controller {
   async register(req, res) {
     let user = await this.User.findOne({ email: req.body.email });
@@ -33,6 +34,7 @@ module.exports = new (class extends controller {
   }
 
   async login(req, res) {
+    throw new Error('login failed');
     const user = await this.User.findOne({email:req.body.email});
     if (!user) {
       return this.response({
