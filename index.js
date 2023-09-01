@@ -21,7 +21,15 @@ app.use(bodyParser.json()); // parse requests of content-type - application/json
 app.use(bodyParser.urlencoded({ extended: true })); // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.static("public"));
 app.use("/api", router);
+
 winston.add(new winston.transports.File({ filename: "logFile.log" }));
+
+//caught Exceptions outside express routes and add to fileLog.log
+process.on("uncaughtException", (ex) => {
+  console.log("uncaughtException");
+  winston.error(ex.message, ex);
+});
+// throw new Error("something goes wrong outside of express routes");
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`server listening on port ${port}`));
