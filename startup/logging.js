@@ -1,6 +1,6 @@
 require("express-async-errors");
 const winston = require("winston");
-const debug = require("debug")("app:main");
+const debug = require("debug")("app:main"); // set namespace app:main to app:main for using debug package (set DEBUG=app:main). npm start command in cmd automatically set name space to app:main and then run project using nodmon
 
 module.exports = function () {
   winston.add(new winston.transports.File({ filename: "logFile.log" }));
